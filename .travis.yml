@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t damsnda/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t damnda/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true damsnda/react-test npm test
+  - docker run -e CI=true damnda/react-test npm test
 
 after_success:
-  - docker build -t damsnda/multi-client ./client
-  - docker build -t damsnda/multi-nginx ./nginx
-  - docker build -t damsnda/multi-server ./server
-  - docker build -t damsnda/multi-worker ./worker
+  - docker build -t damnda/multi-client ./client
+  - docker build -t damnda/multi-nginx ./nginx
+  - docker build -t damnda/multi-server ./server
+  - docker build -t damnda/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push damsnda/multi-client
-  - docker push damsnda/multi-nginx
-  - docker push damsnda/multi-server
-  - docker push damsnda/multi-worker
+  - docker push damnda/multi-client
+  - docker push damnda/multi-nginx
+  - docker push damnda/multi-server
+  - docker push damnda/multi-worker
